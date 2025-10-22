@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rghandou <rghandou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/15 09:30:39 by rghandou          #+#    #+#             */
-/*   Updated: 2025/10/20 11:30:54 by rghandou         ###   ########.fr       */
+/*   Created: 2025/09/22 15:32:18 by rghandou          #+#    #+#             */
+/*   Updated: 2025/10/22 09:43:35 by rghandou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_putnbr(int n)
 	if (n >= 10)
 		ft_putnbr(n / 10);
 	c = (n % 10) + '0';
-	write (1, &c, 1);
+	write(1, &c, 1);
 }
 
 int	ft_atoi(const char *str)
@@ -59,77 +59,25 @@ int	ft_atoi(const char *str)
 	return ((int)(result * sign));
 }
 
-static int	ft_count_word(char const *s, char c)
+static int	ft_isdigit(char c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+int	is_valid_number(const char *str)
 {
 	int	i;
-	int	count;
 
 	i = 0;
-	count = 0;
-	while (s[i])
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (!str[i])
+		return (0);
+	while (str[i])
 	{
-		while (s[i] == c)
-			i++;
-		if (s[i] != '\0')
-		{
-			count++;
-			while (s[i] && s[i] != c)
-				i++;
-		}
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
 	}
-	return (count);
-}
-
-static char	*alloc_word(const char *s, int start, int end)
-{
-	char	*word;
-	int		i;
-
-	i = 0;
-	word = malloc((end - start + 1) * sizeof(char));
-	if (!word)
-		return (NULL);
-	while (start < end)
-		word[i++] = s[start++];
-	word[i] = '\0';
-	return (word);
-}
-
-char	**ft_split(const char *s, char c)
-{
-	char	**result;
-	int		i;
-	int		start;
-	int		j;
-
-	i = 0;
-	j = 0;
-	if (!s)
-		return (NULL);
-	result = malloc((ft_count_word(s, c) + 1) * sizeof(char *));
-	if (!result)
-		return (NULL);
-	while (s[i] && j < ft_count_word(s, c))
-	{
-		while (s[i] == c)
-			i++;
-		start = i;
-		while (s[i] && s[i] != c)
-			i++;
-		if (start < i)
-			result[j++] = alloc_word(s, start, i);
-	}
-	result[j] = NULL;
-	return (result);
-}
-
-t_stack	*ft_stack_last(t_stack*lst)
-{
-	if (lst == NULL)
-		return (NULL);
-	while ((*lst)->next != NULL)
-	{
-		*lst = (*lst)->next;
-	}
-	return (lst);
+	return (1);
 }

@@ -1,68 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_validation.c                                    :+:      :+:    :+:   */
+/*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rghandou <rghandou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:32:18 by rghandou          #+#    #+#             */
-/*   Updated: 2025/10/01 08:49:57 by rghandou         ###   ########.fr       */
+/*   Updated: 2025/10/22 09:18:34 by rghandou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// int	is_repeat(char *str)
-// {
-// 	char	c;
-// 	int		i;
-// 	int		j;
-
-// 	i = 0;
-// 	while (str[i] != '\0')
-// 	{
-// 		j = 1;
-// 		c = str[i];
-// 		while (str[j] != '\0')
-// 		{
-// 			if (c == str[j])
-// 				return (0);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (1);
-// }
-
-// int	is_repeat(int j, int i)
-// {
-// 	if (i == j)
-// 		return (1);
-// 	return (0);
-// }
-
-int	*creation_array(char	*str, int lenght)
+void	ft_putnbr(int n)
 {
-	int	i;
-	int	j;
-	int	res;
-	int	len;
-	int	*array;
+	char	c;
 
-	len = lenght;
-	array = malloc((len) * sizeof(int));
-	i = 0;
-	while (i < len)
+	if (n == -2147483648)
 	{
-		j = 0;
-		res = 0;
-		while (str[j] != '\0')
-		{
-			res = res * 10 + str[j] - 48;
-			j++;
-			array[i] = res;
-		}
+		write(1, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		n = -n;
+		write(1, "-", 1);
+	}
+	if (n >= 10)
+		ft_putnbr(n / 10);
+	c = (n % 10) + '0';
+	write (1, &c, 1);
+}
+
+int	ft_atoi(const char *str)
+{
+	int		i;
+	int		sign;
+	long	result;
+
+	i = 0;
+	sign = 1;
+	result = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
 		i++;
 	}
-	return (array);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - '0');
+		if (result * sign > 2147483647 || result * sign < -2147483648)
+			return (0);
+		i++;
+	}
+	return ((int)(result * sign));
 }

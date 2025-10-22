@@ -6,7 +6,7 @@
 /*   By: rghandou <rghandou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 10:38:50 by rghandou          #+#    #+#             */
-/*   Updated: 2025/10/20 09:58:38 by rghandou         ###   ########.fr       */
+/*   Updated: 2025/10/22 10:26:55 by rghandou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,30 @@ typedef struct s_node
 {
 	int				data;
 	struct s_node	*next;
-}	*t_stack;
+}	t_node;
+typedef t_node	*t_stack;
 
 int			count_stack(t_stack	*s);
 int			pop(t_stack	*s);
 int			is_empty(t_stack	*s);
 int			push(t_stack	*s, int data);
-int			pa(t_stack *s, t_stack *s1);
+void		clear_stack(t_stack *s);
+int			pa(t_stack *a, t_stack *b);
+int			pb(t_stack *b, t_stack *a);
 int			sa(t_stack	*s);
+int			sb(t_stack	*s);
+int			ss(t_stack *a, t_stack *b);
 int			ra(t_stack	*s);
+int			rb(t_stack	*s);
+int			rr(t_stack *a, t_stack *b);
 int			rra(t_stack	*s);
-int			top_index(t_stack	*s);
-int			*creation_array(char	*str, int lenght);
+int			rrb(t_stack	*s);
+int			rrr(t_stack *a, t_stack *b);
+int			*creation_array(char	*str, int *lenght);
+void		free_split(char **split);
 void		ft_putnbr(int n);
-void		ss(t_stack	*s, t_stack *s1);
+char		**ft_split(const char *s, char c);
 t_stack		create_stack(void);
-t_stack		*ft_stack_last(t_stack*lst);
+int			is_sorted(t_stack s);
+void		sort_small(t_stack *a, t_stack *b);
 #endif

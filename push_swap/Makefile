@@ -6,7 +6,7 @@
 #    By: rghandou <rghandou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/05 10:31:16 by rghandou          #+#    #+#              #
-#    Updated: 2025/09/22 08:45:08 by rghandou         ###   ########.fr        #
+#    Updated: 2025/10/22 10:29:37 by rghandou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,12 @@ CFLAG = -Wall -Wextra -Werror
 
 SRC = fct_helper.c \
 	  ft_function_a.c \
-	  ft_libft.c \
 	  ft_input.c \
+	  ft_function_b.c \
+	  ft_function.c \
+	  ft_parsing.c \
+	  ft_algorithm.c \
+	  ft_utils.c
 
 OBJ = $(SRC:.c=.o)
 
